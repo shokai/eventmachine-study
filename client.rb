@@ -9,7 +9,7 @@ PORT = 5000
 arr = ['zanmai', 'kazusuke', 'marutaka', 'homu']
 
 EM::run do
-  @s = TCPSocket.open(HOST, PORT)
+  @s = TCPSocket.new(HOST, PORT)
   EM::defer do
     loop do
       puts msg = arr.choice
@@ -20,8 +20,8 @@ EM::run do
   
   EM::defer do
     loop do
-      recv = @s.gets.strip
-      next if recv.size < 1
+      recv = @s.gets
+      next if recv.strip.size < 1
       puts recv
     end
   end
