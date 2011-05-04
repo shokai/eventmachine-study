@@ -12,7 +12,7 @@ class Client < EM::Connection
   def post_init
     EM::defer do
       loop do
-        msg = @@arr.choice
+        puts msg = @@arr.choice
         send_data msg
         sleep 1
       end
@@ -31,8 +31,6 @@ class Client < EM::Connection
   end
 end
 
-
-
 EM::run do
-  @@client = EM::connect(HOST, PORT, Client)
+  EM::connect(HOST, PORT, Client)
 end
