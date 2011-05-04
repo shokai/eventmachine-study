@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'eventmachine'
 
-HOST = 'localhost'
+HOST = '0.0.0.0'
 PORT = 5000
 
 @@channel = EM::Channel.new
