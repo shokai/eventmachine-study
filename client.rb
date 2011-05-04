@@ -3,10 +3,13 @@ require 'rubygems'
 require 'eventmachine'
 require 'socket'
 
+HOST = 'localhost'
+PORT = 5000
+
 arr = ['zanmai', 'kazusuke', 'marutaka', 'homu']
 
 EM::run do
-  @s = TCPSocket.open('localhost', 5000)
+  @s = TCPSocket.open(HOST, PORT)
   EM::defer do
     loop do
       puts msg = arr.choice
