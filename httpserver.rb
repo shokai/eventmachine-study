@@ -4,6 +4,9 @@ require 'rubygems'
 require 'eventmachine'
 require 'evma_httpserver'
 
+port = 8080
+port = ARGV.shift.to_i if ARGV.size > 0
+
 class Handler  < EventMachine::Connection
   include EventMachine::HttpServer
  
@@ -22,13 +25,6 @@ class Handler  < EventMachine::Connection
 end
 
 EventMachine::run do
-  EventMachine::defer do
-    loop do
-      puts "--"+Time.now.to_s
-      sleep 1
-    end
-  end
-
-  EventMachine::start_server("0.0.0.0", 8080, Handler)
-  puts "http server start, prot 8080"
+  EventMachine::start_server("0.0.0.0", port, Handler)
+  puts "http server start, port #{port}"
 end
