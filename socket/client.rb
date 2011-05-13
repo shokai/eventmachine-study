@@ -26,7 +26,7 @@ class Client < EM::Connection
   def unbind
     puts "connection closed - #{HOST}:#{PORT}"
     EM::add_timer(RECONNECT_INTERVAL) do
-      reconnect(HOST,  PORT)
+      reconnect(HOST, PORT)
     end
   end
 end
