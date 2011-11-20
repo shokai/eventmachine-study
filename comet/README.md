@@ -21,7 +21,7 @@ get and wait, then post
 
    % curl http://localhost:8080/username
 
-wait response..
+wait response 60 sec.
 
 ### post
 
