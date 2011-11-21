@@ -4,7 +4,7 @@ Comet KVS
 run server
 ----------
 
-    % ruby comet-server.rb 8080
+    % ruby server.rb 8080 60
 
 
 post, then get

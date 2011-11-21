@@ -3,10 +3,11 @@ require 'rubygems'
 require 'eventmachine'
 require 'evma_httpserver'
 
-TIMEOUT = 60
-
 port = 8080
 port = ARGV.shift.to_i if ARGV.size > 0
+
+@@comet_timeout = 60
+@@comet_timeout = ARGV.shift.to_i if ARGV.size > 0
 
 @@data = Hash.new
 class CometKvs < EventMachine::Connection
@@ -28,7 +29,7 @@ class CometKvs < EventMachine::Connection
       res.send_response
     elsif @http_request_method == 'GET'
       EM::defer do 
-        TIMEOUT.times do ## keep connection 60 sec
+        @@comet_timeout.times do ## keep connection 60 sec
           break if value = @@data[key]
           sleep 1
         end
@@ -49,5 +50,5 @@ end
 
 EventMachine::run do
   EventMachine::start_server("0.0.0.0", port, CometKvs)
-  puts "http server start, port #{port}"
+  puts "http server start, port:#{port}, comet_timeout:#{@@comet_timeout}(sec)"
 end
